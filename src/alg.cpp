@@ -18,8 +18,12 @@ std::string infx2pstfx(const std::string& infix) {
     char symbol = infix[i];
 
     if (symbol >= '0' && symbol <= '9') {
-      while (i < infix.size() && infix[i] >= '0' && infix[i] <= '9')
-        postfix += infix[i++];
+      postfix += symbol;
+      ++i;
+      while (i < infix.size() && infix[i] >= '0' && infix[i] <= '9') {
+        postfix += infix[i];
+        ++i;
+      }
       postfix += ' ';
       continue;
     }
@@ -67,7 +71,8 @@ int eval(const std::string& postfixStr) {
     }
     if (postfixStr[i] >= '0' && postfixStr[i] <= '9') {
       int x = 0;
-      while (i < postfixStr.size() && postfixStr[i] >= '0' && postfixStr[i] <= '9') {
+      while (i < postfixStr.size() && postfixStr[i] >= '0' &&
+                   postfixStr[i] <= '9') {
         x = x * 10 + (postfixStr[i] - '0');
         ++i;
       }
